@@ -1,4 +1,4 @@
-## :books: Introducción - Mis primeros pasos con SQL
+## :rocket: Introducción - Mis primeros pasos con SQL
 
 Mediante este proyecto se creo una base de datos SQLite pequeña y simple para gestionar y manipular los registros de una academia de educación superior, con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
 
@@ -11,7 +11,8 @@ Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que 
   [Sitio web oficial](https://sqlitebrowser.org/)
 - Miro: Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc. [Página web](https://miro.com/es/signup/)
 
-## Estructura de la base de datos
-## Consultas DDL y DML
-## Tablas
-## Contribuciones
+## :books: Estructura de la base de datos
+
+## :mag_right: Consultas DDL y DML
+## :bookmark_tabs: Tablas
+## :computer: Contribuciones
