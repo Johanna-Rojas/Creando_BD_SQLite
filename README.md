@@ -9,8 +9,7 @@ Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que 
 - SQLite: Sistema de gestión de base de datos (SGBD)
 - DB Browser for SQLite: Aplicación de escritorio amigable con el usuario, diseñada para interactuar con SQLite. 
   [Sitio web oficial](https://sqlitebrowser.org/)
-- Miro: Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc.  
-  [Página web](https://miro.com/es/signup/)
+- Miro: Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc. [Página web](https://miro.com/es/signup/)
 
 ## Estructura de la base de datos
 ## Consultas DDL y DML
