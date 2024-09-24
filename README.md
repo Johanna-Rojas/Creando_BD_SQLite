@@ -28,8 +28,9 @@ En el siguiente enlace se presenta una descripción detallada de la estructura d
 
 ## :mag_right: DDL, DML y consultas
 
-Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modificación de tablas, para luego ir a la ejecución de consultas que nos permiten gestionar los datos de las entidades y extraer información valiosa.
+Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modificación de tablas, para luego ir a la ejecución de consultas que nos permitan gestionar los datos de las entidades y extraer información valiosa.
 
+---
 ### Lenguaje de definición de datos (DDL)
 "Lenguaje usado para definir y modificar la estructura de la base de datos"
 
@@ -39,38 +40,44 @@ A continuación se presentará un apartado del Script comó ejemplo documentado:
 
 ~~~
 -- Creando la base de datos LJ-Academy en SQLite
+
 CREATE DATABASE LJ-Academy;
 
--- Creando la tabla STUDENTS con sus atributos
-CREATE TABLE IF NOT EXISTS "STUDENTS" (                -- Se crea la nueva tabla en caso de que no exista previamente
-	      "STUDENT_ID"	INTEGER,                         -- Primer atributo o culumna de la tabla, cuyo tipo de dato es valores enteros
-	      "FIRSTNAME"	TEXT,                              -- Segundo atributo de tipo texto
-	      "LASTNAME"	TEXT,
-	      "AGE"	INTEGER,
-	      "EMAIL"	TEXT,
-	      "ACADEMICPROGRAM"	TEXT,
-	      "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,    -- Estable el valor de tiempo actual cuando se inserta un nuevo registro
-	      "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,  -- Estable el valor de tiempo actual cuando se inserta o actualiza un nuevo registro
-	      PRIMARY KEY("STUDENT_ID" AUTOINCREMENT)        -- Clave primaria autoincrementable, se asignan valores únicos por registro
+-- Creando la tabla/entidad STUDENTS con sus atributos
+
+CREATE TABLE IF NOT EXISTS "STUDENTS" (          -- Se crea la nueva tabla en caso de que no exista previamente
+	    "STUDENT_ID"	INTEGER,          -- Primer atributo o culumna de la tabla, cuyo tipo de dato es valores enteros
+	    "FIRSTNAME"	TEXT,          -- Segundo atributo de tipo texto
+	    "LASTNAME"	TEXT,
+	    "AGE"	INTEGER,
+	    "EMAIL"	TEXT,
+	    "ACADEMICPROGRAM"	TEXT,
+	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          -- Estable el valor de tiempo actual cuando se inserta un nuevo registro
+	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          -- Estable el valor de tiempo actual cuando se inserta o actualiza un nuevo registro
+	    PRIMARY KEY("STUDENT_ID" AUTOINCREMENT)          -- Clave primaria autoincrementable, se asignan valores únicos por registro
 );
 
--- Creando la tabla REGISTRATIONS
+-- Creando la tabla/entidad REGISTRATIONS
+
 CREATE TABLE IF NOT EXISTS "REGISTRATIONS" (
-	      "REGISTRATION_ID"	INTEGER,
-	      "STUDENT_ID"	INTEGER,
-	      "COURSE_ID"	INTEGER,
-	      "QUALIFICATION"	REAL,                          -- Atributo de tipo decimal
-	      "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
-	      "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
-	      PRIMARY KEY("REGISTRATION_ID" AUTOINCREMENT),
-	      FOREIGN KEY("COURSE_ID") REFERENCES "COURSES"("COURSE_ID"),  -- Clave foránea de COURSE_ID a clave primaria de la entidad COURSES
-	      FOREIGN KEY("STUDENT_ID") REFERENCES "STUDENTS"("STUDENT_ID")
+	    "REGISTRATION_ID"	INTEGER,
+	    "STUDENT_ID"	INTEGER,
+	    "COURSE_ID"	INTEGER,
+	    "QUALIFICATION"	REAL,          -- Atributo de tipo decimal
+	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
+	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
+	    PRIMARY KEY("REGISTRATION_ID" AUTOINCREMENT),
+	    FOREIGN KEY("COURSE_ID") REFERENCES "COURSES"("COURSE_ID"),          -- Clave foránea de COURSE_ID a clave primaria de la entidad COURSES
+	    FOREIGN KEY("STUDENT_ID") REFERENCES "STUDENTS"("STUDENT_ID")
 );
   ~~~
 
-Para visualizar el Script completo de la estructura de datos, ir al siguiente enlace: 
+Para visualizar el Script completo de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
 
+---
 ### Lenguaje de manipulación de datos (DML)
+
+---
 ### Consultas básicas
 
 ## :bookmark_tabs: Tablas
