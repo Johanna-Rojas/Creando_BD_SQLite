@@ -36,7 +36,7 @@ Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modific
 
 Mediante este lenguaje creamos o eliminamos la base de datos, creamos las tablas, índices y vistas y/o añadimos, eliminamos o modificamos columnas.
 
-A continuación se presentará un apartado del Script comó ejemplo documentado:
+A continuación se presentará un apartado del Script comó ejemplo:
 
 ~~~
 -- Creando la base de datos LJ-Academy en SQLite
@@ -45,16 +45,16 @@ CREATE DATABASE LJ-Academy;
 
 -- Creando la tabla/entidad STUDENTS con sus atributos
 
-CREATE TABLE IF NOT EXISTS "STUDENTS" (          -- Se crea la nueva tabla en caso de que no exista previamente
-	    "STUDENT_ID"	INTEGER,          -- Primer atributo o culumna de la tabla, cuyo tipo de dato es valores enteros
-	    "FIRSTNAME"	TEXT,          -- Segundo atributo de tipo texto
+CREATE TABLE IF NOT EXISTS "STUDENTS" (          
+	    "STUDENT_ID"	INTEGER,          
+	    "FIRSTNAME"	TEXT,          
 	    "LASTNAME"	TEXT,
 	    "AGE"	INTEGER,
 	    "EMAIL"	TEXT,
 	    "ACADEMICPROGRAM"	TEXT,
-	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          -- Estable el valor de tiempo actual cuando se inserta un nuevo registro
-	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          -- Estable el valor de tiempo actual cuando se inserta o actualiza un nuevo registro
-	    PRIMARY KEY("STUDENT_ID" AUTOINCREMENT)          -- Clave primaria autoincrementable, se asignan valores únicos por registro
+	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          
+	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          
+	    PRIMARY KEY("STUDENT_ID" AUTOINCREMENT)          
 );
 
 -- Creando la tabla/entidad REGISTRATIONS
@@ -67,12 +67,12 @@ CREATE TABLE IF NOT EXISTS "REGISTRATIONS" (
 	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
 	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,
 	    PRIMARY KEY("REGISTRATION_ID" AUTOINCREMENT),
-	    FOREIGN KEY("COURSE_ID") REFERENCES "COURSES"("COURSE_ID"),          -- Clave foránea de COURSE_ID a clave primaria de la entidad COURSES
+	    FOREIGN KEY("COURSE_ID") REFERENCES "COURSES"("COURSE_ID"),          
 	    FOREIGN KEY("STUDENT_ID") REFERENCES "STUDENTS"("STUDENT_ID")
 );
   ~~~
 
-Para visualizar el Script completo de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
+Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
 
 ---
 ### Lenguaje de manipulación de datos (DML)
