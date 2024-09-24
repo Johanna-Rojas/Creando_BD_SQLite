@@ -6,10 +6,10 @@ Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que 
 
 ## :wrench: Tecnologías utilizadas
 
-- SQLite: Sistema de gestión de base de datos (SGBD)
-- DB Browser for SQLite: Aplicación de escritorio amigable con el usuario, diseñada para interactuar con SQLite. 
+- **SQLite:** Sistema de gestión de base de datos (SGBD)
+- **DB Browser for SQLite:** Aplicación de escritorio amigable con el usuario, diseñada para interactuar con SQLite. 
   [Sitio web oficial](https://sqlitebrowser.org/)
-- Miro: Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc. [Página web](https://miro.com/es/signup/)
+- **Miro:** Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc. [Página web](https://miro.com/es/signup/)
 
 ## :books: Estructura de la base de datos
 
@@ -23,6 +23,7 @@ El **objetivo** principal de nuestra base de datos es almacenar y gestionar la i
 ![DER](Data-Structure/DiagramaER.jpg)
 
 Para una descripción detallada de la estructura de datos utilizada en este proyecto, consulta la siguiente documentación: 
+[Descripción de la estructura de BD LJ-Academy](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data-Structure/Documentation.md)
 
 ## :mag_right: Consultas DDL y DML
 ## :bookmark_tabs: Tablas
