@@ -90,7 +90,7 @@ DROP VIEW Students_Registered_Course;
 
   ~~~
 
-Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
+Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Structure.sql)
 
 ---
 ### Lenguaje de manipulación de datos (DML)
