@@ -1,8 +1,14 @@
 -- ESQUEMA DE LA ESTRUCTURA DE DATOS EXPORTADA DE SQLite
+-- La forma de exportar los datos se realizó desde la terminal Bash -> sqlite3 LJ-Academy.db ".shema" > Esquema.sql
+-- Nota: en SQLite no es posible exportar todas las consultas, por ello el scrip a sido modificado manualmente (copiando y pegando las sentencias y documentando)
 
-CREATE TABLE sqlite_sequence(name,seq);                 -- Tabla interna de SQLite para gestionar el autoincremento de las claves primarias
+-- CREACIÓN DE OBJETOS (Base de datos, tablas, indices y vistas)
 
-CREATE TABLE IF NOT EXISTS "STUDENTS" (                 -- Se crea la tabla/entidad STUDENTS en caso de que no exista previamente
+CREATE DATABASE LJ-Academy;          -- Se crea la base de datos llamada LJ-Academy
+
+CREATE TABLE sqlite_sequence(name,seq);          -- Se crea una tabla interna de SQLite para gestionar el autoincremento de las claves primarias
+
+CREATE TABLE IF NOT EXISTS "STUDENTS" (          -- Se crea la tabla/entidad STUDENTS en caso de que no exista previamente
 	"STUDENT_ID"	INTEGER,                            -- Se agrega el primer atributo o columna de la tabla, como tipo de dato valores enteros
 	"FIRSTNAME"	TEXT,                                   -- Segundo atributo de tipo texto
 	"LASTNAME"	TEXT,
@@ -48,6 +54,31 @@ CREATE TABLE IF NOT EXISTS "REGISTRATIONS" (            -- Se crea la tabla/enti
 	FOREIGN KEY("STUDENT_ID") REFERENCES "STUDENTS"("STUDENT_ID")   -- Clave foránea que relaciona la entidad REGISTRATIONS con STUDENTS
 );
 
+CREATE INDEX idx_COURSENAME                            -- Se crea un índice único llamado idx_coursename (Evita la duplicación de datos)
+ON COURSES(COURSENAME);                                -- En el campo COURSENAME de la tabla COURSES
+
+CREATE INDEX idx_QUALIFICATION                         -- Se crea un índice único para acelerar consultas, optimizar el ordenamiento, etc
+ON REGISTRATIONS(QUALIFICATION)                        -- En el campo QUALIFICATION de la tabla REGISTRATIONS
+
+CREATE VIEW Students_Registered_Course AS              -- Creando una vista de los estudiantes registrados en un curso especifico(tabla virtual)
+SELECT s.FIRSTNAME, s.LASTNAME, s.ACADEMICPROGRAM, c.COURSENAME, c.ACADEMIC_CREDITS, r.QUALIFICATION      --Selección de los campos a mostrar
+FROM [STUDENTS]s                                       -- Obtener los datos de la tabla STUDENTS cuyo alias es "s"
+INNER JOIN [REGISTRATIONS]r ON e.STUDENT_ID = r.STUDENT_ID -- Uniendo la tabla STUDENTS con la tabla REGISTRATIONS con la condición de que coincidan los ID
+INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID; -- Uniendo la tabla REGISTRATIONS con la tabla COURSES cuando coincidan los ID
+
+DROP VIEW Students_Registered_Course      -- Eliminando la vista creada, dado que se presentan errores
+
+CREATE VIEW STUDENTS_COURSE AS              -- Optimizando el nombre, SQLite discrimina entre mayusculas y minusculas
+SELECT s.FIRSTNAME, s.LASTNAME, s.ACADEMICPROGRAM, c.COURSENAME, c.ACADEMIC_CREDITS, r.QUALIFICATION      
+FROM [STUDENTS]s                                      
+INNER JOIN [REGISTRATIONS]r ON s.STUDENT_ID = r.STUDENT_ID -- Error e.STUDENT_ID - Correción s.STUDENT_ID No existe la tabla con el alias "e"  
+INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID;
+
+-- MODIFICACIÓN DE OBJETOS
+
+ALTER TABLE COURSES                                     -- Modificar la tabla COURSES
+RENAME COLUMN CREDITS TO ACADEMIC_CREDITS               -- Renombrar la columna CREDITS como ACADEMIC_CREDITS
+
 -- PROCEDIMIENTOS (Trigger) QUE SE EJECUTARÁN AUTOMÁTICAMENTE SEGÚN LAS INDICACIONES
 
 CREATE TRIGGER BEFORE_UPDATE_REGISTRATIONS              -- Se crea un Trigger llamado BEFORE_UPDATE_REGISTRATIONS
@@ -81,3 +112,5 @@ BEGIN
 	SET UPDATE_DATE = datetime('now')
 	WHERE ROWID = NEW.ROWID;
 END;
+
+-- INSERTANDO DATOS

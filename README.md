@@ -1,8 +1,8 @@
 ## :rocket: Introducción - Mis primeros pasos con SQL
 
-El **objetivo** principal de nuestro proyecto es almacenar y gestionar la información relacionada con los estudiantes, los cursos e instructores de una academia de educación superior, creando así una base de datos pequeña y simple con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
+El **objetivo** principal de este proyecto es almacenar y gestionar la información relacionada con los estudiantes, los cursos e instructores de una academia de educación superior, creando así una base de datos pequeña y simple con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
 
-Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que usar un sistema de gestión de base de datos relacional de código abierto, ligero, rápido, ideal para proyectos pequeños y medianos, que maneje un lenguaje SQL básico y además que sea flexible y no requiera instalación, como lo es: SQLite.
+Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que usar un sistema de gestión de base de datos relacional de código abierto, ligero, rápido, ideal para proyectos pequeños y medianos, que maneje un lenguaje SQL básico y además que sea flexible y no requiera instalación, estas caracteristicas las tiene: SQLite.
 
 ## :gear: Tecnologías utilizadas
 
@@ -11,7 +11,7 @@ Dentro de las tecnologías utilizadas, tenemos:
 - **SQLite:** Sistema de gestión de base de datos (SGBD)
 - **DB Browser for SQLite:** Aplicación de escritorio amigable con el usuario, diseñada para interactuar con SQLite. 
   [Sitio web oficial](https://sqlitebrowser.org/)
-- **Miro:** Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear diagramas, mapas mentales, tableros, etc. [Página web](https://miro.com/es/signup/)
+- **Miro:** Plataforma de desarrollo de flujo de trabajo y colaboración, que permite a los equipos crear mapas mentales, tableros, diagramas como el Entidad - Relación, etc. [Página web](https://miro.com/es/signup/)
 
 ## :books: Estructura de la base de datos
 
@@ -19,7 +19,7 @@ Contar con una estructura sólida en una base de datos es fundamental para garan
 
 Para lograr esto, necesitamos empezar por realizar los planos arquitectónicos que nos permitan organizar las ideas, visualizar de forma clara la estructura de un sistema, comunicar el diseño e identificar posibles inconsistencias o redundancias.
 
-Esos planos arquitectonicos definidos en nuestra área es lo que se conoce como esquema o diagrama entidad-relación (DER), es allí donde se muestran las entidades clave, las relaciones entre ellas y sus atributos. En nuestro caso especifico usamos la aplicación "Miro" para diseñar tal diagrama y presentarlo a continuación:
+Esos planos arquitectonicos definidos en nuestra área, es lo que se conoce como esquema o diagrama entidad-relación (DER), es allí donde se muestran las entidades clave, las relaciones entre ellas y sus atributos. Para este proyecto se uso la aplicación "Miro" con el fin diseñar tal diagrama y presentarlo a continuación:
 
 ![DER](Data-Structure/DiagramaER.jpg)
 
@@ -34,30 +34,15 @@ Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modific
 ### Lenguaje de definición de datos (DDL)
 "Lenguaje usado para definir y modificar la estructura de la base de datos"
 
-Mediante este lenguaje creamos o eliminamos la base de datos, creamos las tablas, índices y vistas y/o añadimos, eliminamos o modificamos columnas.
+Mediante este lenguaje se pueden crear o eliminar bases de datos, tablas, índices y vistas y/o añadir, eliminar o modificar columnas.
 
-A continuación se presentará un apartado del Script comó ejemplo:
+A continuación se presentará un apartado del Script del proyecto comó ejemplo:
 
+--
 ~~~
--- Creando la base de datos LJ-Academy en SQLite
+-- CREACIÓN DE OBJETOS (Base de datos, tablas, indices y vistas)
 
 CREATE DATABASE LJ-Academy;
-
--- Creando la tabla/entidad STUDENTS con sus atributos
-
-CREATE TABLE IF NOT EXISTS "STUDENTS" (          
-	    "STUDENT_ID"	INTEGER,          
-	    "FIRSTNAME"	TEXT,          
-	    "LASTNAME"	TEXT,
-	    "AGE"	INTEGER,
-	    "EMAIL"	TEXT,
-	    "ACADEMICPROGRAM"	TEXT,
-	    "LOAD_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          
-	    "UPDATE_DATE"	TEXT DEFAULT CURRENT_TIMESTAMP,          
-	    PRIMARY KEY("STUDENT_ID" AUTOINCREMENT)          
-);
-
--- Creando la tabla/entidad REGISTRATIONS
 
 CREATE TABLE IF NOT EXISTS "REGISTRATIONS" (
 	    "REGISTRATION_ID"	INTEGER,
@@ -70,7 +55,31 @@ CREATE TABLE IF NOT EXISTS "REGISTRATIONS" (
 	    FOREIGN KEY("COURSE_ID") REFERENCES "COURSES"("COURSE_ID"),          
 	    FOREIGN KEY("STUDENT_ID") REFERENCES "STUDENTS"("STUDENT_ID")
 );
+
+CREATE INDEX idx_COURSENAME                          
+ON COURSES(COURSENAME);
+
+CREATE VIEW Students_Registered_Course AS              
+SELECT s.FIRSTNAME, s.LASTNAME, s.ACADEMICPROGRAM, c.COURSENAME, c.ACADEMIC_CREDITS, r.QUALIFICATION      
+FROM [STUDENTS]s                                       
+INNER JOIN [REGISTRATIONS]r ON e.STUDENT_ID = r.STUDENT_ID coincidan los ID
+INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID; 
+
+DROP VIEW Students_Registered_Course
+
+CREATE VIEW STUDENTS_COURSE AS              
+SELECT s.FIRSTNAME, s.LASTNAME, s.ACADEMICPROGRAM, c.COURSENAME, c.ACADEMIC_CREDITS, r.QUALIFICATION      
+FROM [STUDENTS]s                                      
+INNER JOIN [REGISTRATIONS]r ON s.STUDENT_ID = r.STUDENT_ID 
+INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID;
+
+-- MODIFICACIÓN DE OBJETOS
+
+ALTER TABLE COURSES                                     
+RENAME COLUMN CREDITS TO ACADEMIC_CREDITS               
+  
   ~~~
+  --
 
 Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
 
