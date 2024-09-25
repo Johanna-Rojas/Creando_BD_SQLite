@@ -36,11 +36,12 @@ Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modific
 
 Mediante este lenguaje se pueden crear o eliminar bases de datos, tablas, índices y vistas y/o añadir, eliminar o modificar columnas.
 
-A continuación se presentará un apartado del Script del proyecto comó ejemplo:
+A continuación se presenta un apartado del Script del proyecto comó ejemplo:
 
---
 ~~~
--- CREACIÓN DE OBJETOS (Base de datos, tablas, indices y vistas)
+----------------------------------------------------------------------------------------------------
+-- CREACIÓN DE OBJETOS (Base de datos, tablas, indices y vistas) DDL
+----------------------------------------------------------------------------------------------------
 
 CREATE DATABASE LJ-Academy;
 
@@ -73,18 +74,37 @@ FROM [STUDENTS]s
 INNER JOIN [REGISTRATIONS]r ON s.STUDENT_ID = r.STUDENT_ID 
 INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID;
 
--- MODIFICACIÓN DE OBJETOS
-
+-----------------------------------------------------------------------------------------------------
+-- MODIFICACIÓN DE OBJETOS (Modificar, renombrar, eliminar) DDL
+----------------------------------------------------------------------------------------------------
 ALTER TABLE COURSES                                     
 RENAME COLUMN CREDITS TO ACADEMIC_CREDITS               
-  
+
+CREATE VIEW Students_Registered_Course AS     
+SELECT s.FIRSTNAME, s.LASTNAME, s.ACADEMICPROGRAM, c.COURSENAME, c.ACADEMIC_CREDITS, r.QUALIFICATION    
+FROM [STUDENTS]s     
+INNER JOIN [REGISTRATIONS]r ON e.STUDENT_ID = r.STUDENT_ID     -- Error e.STUDENT_ID - Correción s.STUDENT_ID No existe la tabla con alias "e"  
+INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID;     
+
+DROP VIEW Students_Registered_Course;
+
   ~~~
-  --
 
 Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Esquema.sql)
 
 ---
 ### Lenguaje de manipulación de datos (DML)
+"Lenguaje usado para manipular los datos dentro de las tablas de la base de datos"
+
+Este lenguaje permite consultar datos, recuperarlos, insertarlos, modificarlos, eliminarlos, etc.
+
+Ejemplo del partado del Script del proyecto:
+
+~~~
+----------------------------------------------------------------------------------------------------
+-- MANIPULACIÓN DE DATOS / DML
+----------------------------------------------------------------------------------------------------
+
 
 ---
 ### Consultas básicas
