@@ -90,7 +90,7 @@ DROP VIEW Students_Registered_Course;
 
   ~~~
 
-Para visualizar el Script completo y documentado de la estructura de datos, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Structure.sql)
+Para visualizar el ***Script completo y documentado de la estructura de datos***, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Structure.sql)
 
 ---
 ### Lenguaje de manipulación de datos (DML)
@@ -104,10 +104,49 @@ Ejemplo del partado del Script del proyecto:
 ----------------------------------------------------------------------------------------------------
 -- MANIPULACIÓN DE DATOS / DML
 ----------------------------------------------------------------------------------------------------
+-- AGREGANDO DISPARADORES
 
+CREATE TRIGGER BEFORE_UPDATE_INSTRUCTORS
+BEFORE UPDATE ON INSTRUCTORS
+BEGIN
+	UPDATE INSTRUCTORS
+	SET UPDATE_DATE = datetime('now')
+	WHERE ROWID = NEW.ROWID;
+END;
 
----
-### Consultas básicas
+-- INSERTANDO NUEVOS REGISTROS 
+
+INSERT INTO STUDENTS (FIRSTNAME, LASTNAME, AGE, EMAIL, ACADEMICPROGRAM)
+	   VALUES ("Oliver","Jones",17,"oliverj@gmail.com","mechanical engineering"),
+			  ("Jack","Valencia",21,"valenciajack@gmail.com","commercial engineering"),
+			  ("Harry","Taylor",19,"harry2050@gmail.com","systems engineering");
+
+-- ELIMINANDO REGISTROS 
+
+DELETE FROM REGISTRATIONS
+WHERE STUDENT_ID = 17;
+DELETE FROM STUDENTS
+WHERE STUDENT_ID = 17;
+
+-- ACTUALIZANDO LOS REGISTROS
+
+-- Actualizaciones individuales
+UPDATE REGISTRATIONS SET QUALIFICATION = 3.7 WHERE REGISTRATION_ID = 27;
+UPDATE REGISTRATIONS SET QUALIFICATION = 2.9 WHERE REGISTRATION_ID = 28;
+
+-- Actualizaciones por lotes
+UPDATE REGISTRATIONS                 
+SET QUALIFICATION =                  
+	(
+		SELECT NEW_QUALIFICATION     
+		FROM NEW_QUALIFICATIONS      
+		WHERE REGISTRATIONS.REGISTRATION_ID = NEW_QUALIFICATIONS.REGISTRATION_ID     
+	)     
+WHERE QUALIFICATION IS NULL;
+
+~~~
+
+Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencia de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
 
 ## :bookmark_tabs: Tablas
 ## :computer: Contribuciones

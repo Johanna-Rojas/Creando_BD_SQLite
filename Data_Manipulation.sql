@@ -4,7 +4,6 @@
 ----------------------------------------------------------------------------------------------------
 -- MANIPULACIÓN DE DATOS (DML) / CONSULTAS
 ----------------------------------------------------------------------------------------------------
-
 -- AGREGANDO DISPARADORES PARA ACTUALIZAR LOS CAMPOS DE UPDATE_DATE EN CADA TABLA
 
 CREATE TRIGGER BEFORE_UPDATE_REGISTRATIONS     -- Crea un Trigger (procedimiento que se ejecutará automáticamente según las indicaciones)
@@ -88,7 +87,7 @@ UPDATE REGISTRATIONS SET QUALIFICATION = 2.9 WHERE REGISTRATION_ID = 28;
 UPDATE REGISTRATIONS SET QUALIFICATION = 2.0 WHERE REGISTRATION_ID = 29;
 UPDATE REGISTRATIONS SET QUALIFICATION = 4.2 WHERE REGISTRATION_ID = 30;
 
--- Actualizaciones por lotes en SQLite
+-- Actualizaciones por lotes en SQLite mediante Subconsultas
 
 CREATE TEMPORARY TABLE NEW_QUALIFICATIONS     -- Crea una tabla temporal cuyo nombre es NEW_QUALIFICATIONS
 (
