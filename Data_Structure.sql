@@ -1,5 +1,6 @@
--- ESQUEMA DE LA ESTRUCTURA DE DATOS EXPORTADA DE SQLite - La forma de exportar los datos se realizó desde la terminal Bash -> sqlite3 LJ-Academy.db ".schema" > Esquema.sql
--- Nota: en SQLite no es posible exportar todas las consultas, por ello el scrip a sido modificado manualmente (copiando/pegando las sentencias y documentando como parte del proceso de aprendizaje, normalmente el código debe ser lo suficientemente descriptivo)
+-- ESQUEMA DE LA ESTRUCTURA DE DATOS EXPORTADA DE SQLite
+-- La forma de exportar los datos se realizó desde la terminal Bash -> sqlite3 LJ-Academy.db ".schema" > Esquema.sql
+-- Nota: SQLite no almacena de forma explicita el historial de las sentencias, por ello, el scrip a sido modificado manualmente (copiando/pegando las sentencias y documentando como parte del proceso de aprendizaje)
 
 ----------------------------------------------------------------------------------------------------
 -- CREACIÓN DE OBJETOS (DATABASE, TABLE, INDEX y VIEW) DDL
@@ -82,42 +83,3 @@ INNER JOIN [REGISTRATIONS]r ON e.STUDENT_ID = r.STUDENT_ID     -- Error e.STUDEN
 INNER JOIN [COURSES]c ON r.COURSE_ID = c.COURSE_ID;     -- Une la tabla REGISTRATIONS con la tabla COURSES cuando coincidan los ID  
 
 DROP VIEW Students_Registered_Course;     -- Elimina la vista creada, dado que se presentaban errores
-
-----------------------------------------------------------------------------------------------------
--- MANIPULACIÓN DE DATOS () DML
-----------------------------------------------------------------------------------------------------
--- PROCEDIMIENTOS (Trigger) QUE SE EJECUTARÁN AUTOMÁTICAMENTE SEGÚN LAS INDICACIONES
-
-CREATE TRIGGER BEFORE_UPDATE_REGISTRATIONS              -- Crea un Trigger llamado BEFORE_UPDATE_REGISTRATIONS
-BEFORE UPDATE ON REGISTRATIONS                          -- Especifica que el Trigger se ejecutará antes de una actualización en la tabla
-BEGIN                                                   -- Inicializa el bloque de código a ejecutar al activar el Trigger
-	UPDATE REGISTRATIONS                                -- Actualiza la tabla REGISTRATIONS
-	SET UPDATE_DATE = datetime('now')                   -- Establece el valor de la columna en la fecha y hora actuales (formato ISO 8601)
-	WHERE ROWID = NEW.ROWID;                            -- Filtra la actualización para que solo se aplique al registro modificado
-	END;                                                -- Finaliza el bloque de codigo del Trigger
-
-CREATE TRIGGER BEFORE_UPDATE_INSTRUCTORS
-BEFORE UPDATE ON INSTRUCTORS
-BEGIN
-	UPDATE INSTRUCTORS
-	SET UPDATE_DATE = datetime('now')
-	WHERE ROWID = NEW.ROWID;
-END;
-
-CREATE TRIGGER BEFORE_UPDATE_COURSES
-BEFORE UPDATE ON COURSES
-BEGIN
-	UPDATE COURSES
-	SET UPDATE_DATE = datetime('now')
-	WHERE ROWID = NEW.ROWID;
-END;
-
-CREATE TRIGGER BEFORE_UPDATE_STUDENTS
-BEFORE UPDATE ON STUDENTS
-BEGIN
-	UPDATE STUDENTS
-	SET UPDATE_DATE = datetime('now')
-	WHERE ROWID = NEW.ROWID;
-END;
-
--- INSERTANDO DATOS
