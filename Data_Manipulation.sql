@@ -1,5 +1,6 @@
--- Nota: SQLite no almacena de forma explicita el historial de las sentencias, por ello, el scrip a sido modificado manualmente (copiando/pegando las sentencias y documentando como parte del proceso de aprendizaje)
-
+-- Nota: SQLite no almacena de forma explicita el historial de las sentencias, 
+-- por ello, el scrip a sido modificado manualmente 
+-- Copiando/pegando las sentencias y documentando como parte del proceso de aprendizaje
 ----------------------------------------------------------------------------------------------------
 -- MANIPULACIÓN DE DATOS (DML) / CONSULTAS
 ----------------------------------------------------------------------------------------------------
@@ -12,7 +13,7 @@ BEGIN                                          -- Inicializa el bloque de códig
 	UPDATE REGISTRATIONS                       -- Actualiza la tabla REGISTRATIONS
 	SET UPDATE_DATE = datetime('now')          -- Establece el valor de la columna en la fecha y hora actuales (formato ISO 8601)
 	WHERE ROWID = NEW.ROWID;                   -- Filtra la actualización para que solo se aplique al registro modificado
-	END;                                       -- Finaliza el bloque de codigo del Trigger
+END;                                           -- Finaliza el bloque de codigo del Trigger
 
 CREATE TRIGGER BEFORE_UPDATE_INSTRUCTORS
 BEFORE UPDATE ON INSTRUCTORS
@@ -76,8 +77,9 @@ DELETE FROM STUDENTS
 WHERE STUDENT_ID = 17;
 
 -- ACTUALIZANDO LOS REGISTROS NULL DEL CAMPO QUALIFICATION DE LA TABLA REGISTRATIONS
-
--- Nota: la idea es actualizar múltiples registros del mismo campo, esto se puede hacer mediante sentencias individuales o por lotes dependera de la cantidad de los registros y la complejidad de los valores
+-- Nota: la idea es actualizar múltiples registros del mismo campo, 
+-- esto se puede hacer mediante sentencias individuales o por lotes 
+-- dependera de la cantidad de los registros y la complejidad de los valores
 
 -- Actualizaciones individuales
 
@@ -106,10 +108,13 @@ INSERT INTO NEW_QUALIFICATIONS (REGISTRATION_ID, NEW_QUALIFICATION)     -- Inser
 			  (57,5.0),(58,4.9),(59,4.9),(60,5.0),
 			  (61,3.7),(62,4.1),(63,3.5);
 
-UPDATE REGISTRATIONS     -- Actualiza los registros de la tabla que cumplan con la condición de que los valores sean nulos(**)
-SET QUALIFICATION = (SELECT NEW_QUALIFICATION     -- Subconsulta: Busca en la tabla temporal el registro con el mismo ID
-					 FROM NEW_QUALIFICATIONS      -- Si es coincidente, el valor NEW.QUALIFICATION se devuelve a la consulta proncipal
-					 WHERE REGISTRATIONS.REGISTRATION_ID = NEW_QUALIFICATIONS.REGISTRATION_ID)     -- El valor devuelto se asigna a QUALIFICATION
-WHERE QUALIFICATION IS NULL;     -- (**)
+UPDATE REGISTRATIONS                 -- Actualiza los registros de la tabla que cumplan con la condición de que los valores sean nulos(**)
+SET QUALIFICATION =                  -- El valor devuelto de la subconsulta se asigna a QUALIFICATION
+	(
+		SELECT NEW_QUALIFICATION     -- Subconsulta: Busca en la tabla temporal el registro con el mismo ID
+		FROM NEW_QUALIFICATIONS      -- Si es coincidente, el valor NEW.QUALIFICATION se devuelve a la consulta proncipal
+		WHERE REGISTRATIONS.REGISTRATION_ID = NEW_QUALIFICATIONS.REGISTRATION_ID     
+	)     
+WHERE QUALIFICATION IS NULL;         -- (**)
 
-DROP TABLE NEW_QUALIFICATIONS;     -- Elimina la tabla temporal
+DROP TABLE NEW_QUALIFICATIONS;       -- Elimina la tabla temporal
