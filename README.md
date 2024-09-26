@@ -26,7 +26,7 @@ Esos planos arquitectonicos definidos en nuestra área, es lo que se conoce como
 En el siguiente enlace se presenta una descripción detallada de la estructura de datos: 
 [Descripción de la estructura de BD LJ-Academy](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data-Structure/Documentation.md)
 
-## :mag_right: DDL, DML y consultas
+## :mag_right: Lenguaje de Definición y Manipulación de datos
 
 Teniendo nuestro esquema definido y normalizado, pasamos a la creacion y modificación de tablas, para luego ir a la ejecución de consultas que nos permitan gestionar los datos de las entidades y extraer información valiosa.
 
@@ -128,7 +128,7 @@ WHERE STUDENT_ID = 17;
 DELETE FROM STUDENTS
 WHERE STUDENT_ID = 17;
 
--- ACTUALIZANDO LOS REGISTROS
+-- ACTUALIZANDO REGISTROS
 
 -- Actualizaciones individuales
 UPDATE REGISTRATIONS SET QUALIFICATION = 3.7 WHERE REGISTRATION_ID = 27;
@@ -146,7 +146,13 @@ WHERE QUALIFICATION IS NULL;
 
 ~~~
 
-Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencia de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
+Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
 
 ## :bookmark_tabs: Tablas
 ## :computer: Contribuciones
+
+Este proyecto genera un espacio para aprender y crecer. 
+Siéntete libre de explorar el código, hacer preguntas y proponer mejoras. 
+Tus comentarios son muy valiosos. :dizzy:
+
+***¡Gracias por tu interés en el proyecto!***
