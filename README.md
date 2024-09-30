@@ -190,11 +190,11 @@ Para visualizar el ***Script completo y documentado de Manipulación de datos***
 
 De acuerdo a las sentencias de manipulacion y/o consulta de datos, se obtienen mediante el DB Browser for SQLite tablas y gráficos que pueden ser de interes para un análisis detallado de la información, en la siguiente carpeta [Tablas & Gráficos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/tree/main/TablasGraficos) pueden encontrar la recopilación de algunos gráficos simples con sus respectivas tablas.
 
-Ejemplo de ello, el siguiente gráfico de barras nos enseña el promedio de calificaciones obtenido por estudiante (suponiendo que corresponde a la nota semestral), de acuerdo a la cantidad de materias matriculadas y al total de creditos academicos:
+El siguiente gráfico de barras nos enseña el promedio de calificaciones obtenido por estudiante (suponiendo que corresponde a la nota semestral), de acuerdo a la cantidad de materias matriculadas y al total de creditos academicos:
 
 ![Average-Qualification](TablasGraficos/SemesterAverage2.png)
 
-Nota: La herramienta no permite manipular los colores ni tipos de gráficos, por ende sería útil utilizar alguna otra herramienta para desarrollar los Dashboard.
+*Nota: La herramienta no permite manipular los colores ni tipos de gráficos, por ende sería útil utilizar alguna otra herramienta para desarrollar los Dashboard.*
 
 Del gráfico de barras podemos inferir por ejemplo que: 
 - Dentro de los estudiantes con mejor promedio, Thomas Brown fue quien matriculo más asignaturas equivalentes a 16 créditos académicos y obtuvo 4.96 de una nota maxima de 5.0.
@@ -204,10 +204,12 @@ Del gráfico de barras podemos inferir por ejemplo que:
 
 ![Student/Course](TablasGraficos/NumStudentCourses.png)
 
-Con este segundo gráfico podemos concluir:
+Con este segundo gráfico podemos concluir que:
 - Al curso que más estudiantes se registraron fue al de Mathematics I (9 estudiantes)
 - Al curso que menos estudiantes se registraron fue al de Biology
 - El curso de Chemistry impartido por el instructor Carlo Rey tiene 4 estudiantes matriculados y es el que menor promedio de calificaciones tiene, de 2.75
+
+*Nota: y así, podemos seguir jugando e infiriendo información valiosa de la base de datos [LJ-Academy](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/LJ-Academy.db)*
 
 ## :computer: Contribuciones
 
