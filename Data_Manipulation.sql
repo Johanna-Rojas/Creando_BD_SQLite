@@ -87,7 +87,7 @@ UPDATE REGISTRATIONS SET QUALIFICATION = 2.9 WHERE REGISTRATION_ID = 28;
 UPDATE REGISTRATIONS SET QUALIFICATION = 2.0 WHERE REGISTRATION_ID = 29;
 UPDATE REGISTRATIONS SET QUALIFICATION = 4.2 WHERE REGISTRATION_ID = 30;
 
--- Actualizaciones por lotes en SQLite mediante Subconsultas
+-- Actualización por lotes en SQLite mediante Subconsultas
 
 0CREATE TEMPORARY TABLE NEW_QUALIFICATIONS     -- Crea una tabla temporal cuyo nombre es NEW_QUALIFICATIONS
 (
@@ -118,14 +118,97 @@ WHERE QUALIFICATION IS NULL;         -- (**)
 
 DROP TABLE NEW_QUALIFICATIONS;       -- Elimina la tabla temporal
 
--- CONSULTAS, SUBCONSULTAS, TRANSACCIONES
+-- OPERANDO CON LOS DATOS PARA POSTERIORES ANALISIS
 
--- Agrupación del promedio de calificaciones por curso
+-- Agrupando el promedio de calificaciones por curso
 
-SELECT c.INSTRUCTOR_ID, c.COURSENAME,     --Campos de devolver "Tabla.Columna"
+SELECT c.INSTRUCTOR_ID, c.COURSENAME,     --Devuelve los campos según el siguiente formato "Tabla.Columna"
        printf("%.2f", avg(r.QUALIFICATION)) AS AVERAGE     -- Calcula el promedio de calificaciones y lo formatea a 2 decimales [printf("%.2f")]
 FROM REGISTRATIONS r     -- Realiza la consulta sobre esta tabla
 INNER JOIN COURSES c     -- Combina las tablas registrations y courses
 ON r.COURSE_ID = c.COURSE_ID     -- Según esta condición (los ID de ambas tablas coincidan)
 GROUP BY r.COURSE_ID     -- Agrupa los resultados por el campo course_ID de la tabla registrations
 -- Resultado: 11 filas devueltas en 16ms
+
+-- Agrupando datos de los cursos (Estudiantes,Instructor,Calificaciones)
+
+SELECT sc.COURSENAME AS COURSE, sc.ACADEMIC_CREDITS AS CEDITS,
+	   CONCAT(i.FIRSTNAME,' ',i.LASTNAME) AS INSTRUCTOR_NAME,     -- Une dos columnas de texto y asigna un alias "Nombre del instructor"
+	   COUNT(DISTINCT sc.FIRSTNAME) AS NUM_STUDENTS,     -- Cuenta la cantidad de nombres distintos
+	   printf("%.2f", avg(sc.QUALIFICATION)) AS AVERAGE_GRADE
+FROM STUDENTS_COURSE sc
+INNER JOIN COURSES c ON sc.COURSENAME = c.COURSENAME 
+INNER JOIN INSTRUCTORS i ON c.INSTRUCTOR_ID = i.INSTRUCTORS_ID
+GROUP BY sc.COURSENAME
+-- Resultado: 11 filas devueltas en 33ms
+
+-- Estudiantes registrados en el curso de Matematicas I
+
+SELECT CONCAT(FIRSTNAME,' ',LASTNAME) AS STUDENT_NAME, 
+	   ACADEMICPROGRAM, QUALIFICATION 
+FROM STUDENTS_COURSE
+WHERE COURSENAME = "Mathematics I"
+-- Resultado: 9 filas devueltas en 20ms
+
+-- Estudiantes que tomaron más de 3 cursos
+
+SELECT s.FIRSTNAME, r.STUDENT_ID, COUNT(*) AS NUM_COURSES 
+FROM REGISTRATIONS r
+INNER JOIN STUDENTS s ON r.STUDENT_ID = s.STUDENT_ID
+GROUP BY r.STUDENT_ID     -- Agrupa los registros por ID
+HAVING NUM_COURSES > 3    -- Filtra el grupo, dejando solo los que hayan escogido más de 3 cursos
+-- Resultado: 6 filas devueltas en 30ms
+
+-- Estudiantes que han tenido la calificación más alta en cada curso
+
+SELECT CONCAT(s.FIRSTNAME,' ',s.LASTNAME) AS STUDENT_NAME, 
+	   s.AGE,
+       c.COURSENAME AS COURSE, 
+	   s.ACADEMICPROGRAM,
+	   MAX(r.QUALIFICATION) AS MAX_QUALIFICATION     -- Encuentra el valor maximo del campo Qualification para cada curso(**)
+FROM REGISTRATIONS r
+INNER JOIN STUDENTS s ON r.STUDENT_ID = s.STUDENT_ID
+INNER JOIN COURSES c ON r.COURSE_ID = c.COURSE_ID
+GROUP BY r.COURSE_ID
+ORDER BY MAX_QUALIFICATION DESC, STUDENT_NAME     -- (**)
+-- Resultado: 11 filas devueltas en 34ms     
+
+-- Estudiantes con la calificación más baja en cada curso
+
+SELECT CONCAT(s.FIRSTNAME,' ',s.LASTNAME) AS STUDENT_NAME, 
+       c.COURSENAME AS COURSE, 
+	   min(r.QUALIFICATION) AS MIN_QUALIFICATION     -- Encuentra el valor minimo del campo Qualification para cada curso(**)
+FROM REGISTRATIONS r
+INNER JOIN STUDENTS s ON r.STUDENT_ID = s.STUDENT_ID
+INNER JOIN COURSES c ON r.COURSE_ID = c.COURSE_ID
+GROUP BY r.COURSE_ID     -- (**)
+ORDER BY MIN_QUALIFICATION, STUDENT_NAME      
+
+-- Identificando la mayor variación de calificaciones en los cursos
+
+SELECT c.COURSENAME, 
+	   CONCAT(i.FIRSTNAME,' ',i.LASTNAME) AS INSTRUCTOR_NAME,
+	   COUNT(DISTINCT STUDENT_ID) AS NUM_STUDENTS,
+	   printf("%.2f", avg(QUALIFICATION)) AS AVERAGE_GRADE,
+	   MAX(QUALIFICATION)-MIN(QUALIFICATION) AS RATING_RANGE
+FROM REGISTRATIONS r
+INNER JOIN COURSES c ON r.COURSE_ID = c.COURSE_ID
+INNER JOIN INSTRUCTORS i ON c.INSTRUCTOR_ID = i.INSTRUCTORS_ID
+GROUP BY r.COURSE_ID
+ORDER BY RATING_RANGE DESC
+-- Resultado: 11 filas devueltas en 26ms
+
+-- Calculando el promedio semestral
+
+SELECT CONCAT(s.FIRSTNAME,' ',s.LASTNAME) AS STUDENT_NAME, 
+	   s.AGE, s.ACADEMICPROGRAM,
+	   COUNT(r.COURSE_ID) AS TOTAL_COURSES,     -- Cuenta la cantidad de cursos matriculados por estudiante(**)
+	   SUM(ACADEMIC_CREDITS) AS TOTAL_CREDITS,     -- Suma la cantidad de creditos matriculados por estudiante(**)
+	   printf("%.2f", SUM(r.QUALIFICATION * c.ACADEMIC_CREDITS) / SUM(ACADEMIC_CREDITS))     -- Promedio de notas teniendo según los creditos
+	   AS SEMESTER_AVERAGE     -- Alias del promedio de calificaciones o notas
+FROM STUDENTS s
+INNER JOIN REGISTRATIONS r ON s.STUDENT_ID = r.STUDENT_ID
+INNER JOIN COURSES c ON r.COURSE_ID = c.COURSE_ID
+GROUP BY STUDENT_NAME     -- (**)
+ORDER BY SEMESTER_AVERAGE DESC     -- Ordena la tabla según el promedio de calificaciones (mayor a menor)
+-- Resultado: 20 filas devueltas en 46ms
