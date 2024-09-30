@@ -89,7 +89,7 @@ UPDATE REGISTRATIONS SET QUALIFICATION = 4.2 WHERE REGISTRATION_ID = 30;
 
 -- Actualizaciones por lotes en SQLite mediante Subconsultas
 
-CREATE TEMPORARY TABLE NEW_QUALIFICATIONS     -- Crea una tabla temporal cuyo nombre es NEW_QUALIFICATIONS
+0CREATE TEMPORARY TABLE NEW_QUALIFICATIONS     -- Crea una tabla temporal cuyo nombre es NEW_QUALIFICATIONS
 (
 	REGISTRATION_ID INTEGER,                  -- Agrega el campo REGISTRATION_ID con tipo de dato valor entero
 	NEW_QUALIFICATION REAL                    -- Agrega el campo NEW_QUALIFICATION con tipo de dato decimal
@@ -117,3 +117,15 @@ SET QUALIFICATION =                  -- El valor devuelto de la subconsulta se a
 WHERE QUALIFICATION IS NULL;         -- (**)
 
 DROP TABLE NEW_QUALIFICATIONS;       -- Elimina la tabla temporal
+
+-- CONSULTAS, SUBCONSULTAS, TRANSACCIONES
+
+-- Agrupación del promedio de calificaciones por curso
+
+SELECT c.INSTRUCTOR_ID, c.COURSENAME,     --Campos de devolver "Tabla.Columna"
+       printf("%.2f", avg(r.QUALIFICATION)) AS AVERAGE     -- Calcula el promedio de calificaciones y lo formatea a 2 decimales [printf("%.2f")]
+FROM REGISTRATIONS r     -- Realiza la consulta sobre esta tabla
+INNER JOIN COURSES c     -- Combina las tablas registrations y courses
+ON r.COURSE_ID = c.COURSE_ID     -- Según esta condición (los ID de ambas tablas coincidan)
+GROUP BY r.COURSE_ID     -- Agrupa los resultados por el campo course_ID de la tabla registrations
+-- Resultado: 11 filas devueltas en 16ms

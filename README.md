@@ -90,7 +90,7 @@ DROP VIEW Students_Registered_Course;
 
   ~~~
 
-Para visualizar el ***Script completo y documentado de la estructura de datos***, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Structure.sql)
+Para visualizar el ***Script completo y documentado de la estructura de datos***, ir al siguiente enlace: [Esquema estructura de datos SQLite]()
 
 ---
 ### Lenguaje de manipulación de datos (DML)
@@ -144,9 +144,18 @@ SET QUALIFICATION =
 	)     
 WHERE QUALIFICATION IS NULL;
 
+-- Agrupación del promedio de calificaciones por curso
+
+SELECT INSTRUCTOR_ID, c.COURSENAME, 
+       printf("%.2f", avg(r.QUALIFICATION)) AS AVERAGE
+FROM REGISTRATIONS r
+INNER JOIN COURSES c
+ON r.COURSE_ID = c.COURSE_ID
+GROUP BY r.COURSE_ID
+
 ~~~
 
-Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
+Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos]()
 
 ## :bookmark_tabs: Tablas
 ## :computer: Contribuciones
