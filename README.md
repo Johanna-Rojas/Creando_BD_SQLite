@@ -90,7 +90,7 @@ DROP VIEW Students_Registered_Course;
 
   ~~~
 
-Para visualizar el ***Script completo y documentado de la estructura de datos***, ir al siguiente enlace: [Esquema estructura de datos SQLite]()
+Para visualizar el ***Script completo y documentado de la estructura de datos***, ir al siguiente enlace: [Esquema estructura de datos SQLite](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data-Structure/Data_Structure.sql)
 
 ---
 ### Lenguaje de manipulación de datos (DML)
@@ -155,7 +155,7 @@ GROUP BY r.COURSE_ID
 
 ~~~
 
-Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos]()
+Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
 
 ## :bookmark_tabs: Tablas
 ## :computer: Contribuciones
