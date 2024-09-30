@@ -186,7 +186,29 @@ ORDER BY SEMESTER_AVERAGE DESC
 
 Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
 
-## :bookmark_tabs: Tablas
+## :bookmark_tabs: Tablas y Gráficos
+
+De acuerdo a las sentencias de manipulacion y/o consulta de datos, se obtienen mediante el DB Browser for SQLite tablas y gráficos que pueden ser de interes para un análisis detallado de la información, en la siguiente carpeta [Tablas & Gráficos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/tree/main/TablasGraficos) pueden encontrar la recopilación de algunos gráficos simples con sus respectivas tablas.
+
+Ejemplo de ello, el siguiente gráfico de barras nos enseña el promedio de calificaciones obtenido por estudiante (suponiendo que corresponde a la nota semestral), de acuerdo a la cantidad de materias matriculadas y al total de creditos academicos:
+
+![Average-Qualification](TablasGraficos/SemesterAverage2.png)
+
+Nota: La herramienta no permite manipular los colores ni tipos de gráficos, por ende sería útil utilizar alguna otra herramienta para desarrollar los Dashboard.
+
+Del gráfico de barras podemos inferir por ejemplo que: 
+- Dentro de los estudiantes con mejor promedio, Thomas Brown fue quien matriculo más asignaturas equivalentes a 16 créditos académicos y obtuvo 4.96 de una nota maxima de 5.0.
+- Santiago Vega se registro a 2 cursos que suman 7 créditos y su promedio semestral fue el más bajo, de 1.93
+- Harry Taylor fue quien se matriculó a más cursos (5) que equivalen a 17 créditos académicos (el máximo) y obtuvo un promedio de 3.43
+- Olivia Martin estaba registrada a 2 de las asignaturas con los créditos más bajos, 6 en total y su promedio de calificaciones fue de 5.0
+
+![Student/Course](TablasGraficos/NumStudentCourses.png)
+
+Con este segundo gráfico podemos concluir:
+- Al curso que más estudiantes se registraron fue al de Mathematics I (9 estudiantes)
+- Al curso que menos estudiantes se registraron fue al de Biology
+- El curso de Chemistry impartido por el instructor Carlo Rey tiene 4 estudiantes matriculados y es el que menor promedio de calificaciones tiene, de 2.75
+
 ## :computer: Contribuciones
 
 Este proyecto genera un espacio para aprender y crecer. 
