@@ -1,4 +1,4 @@
-## :rocket: Introducción - Mis primeros pasos con SQL
+## :rocket: Introducción
 
 El **objetivo** principal de este proyecto es almacenar y gestionar la información relacionada con los estudiantes, los cursos e instructores de una academia de educación superior, creando así una base de datos pequeña y simple con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
 
@@ -19,7 +19,9 @@ Contar con una estructura sólida en una base de datos es fundamental para garan
 
 Para lograr esto, necesitamos empezar por realizar los planos arquitectónicos que nos permitan organizar las ideas, visualizar de forma clara la estructura de un sistema, comunicar el diseño e identificar posibles inconsistencias o redundancias.
 
-Esos planos arquitectonicos definidos en nuestra área, es lo que se conoce como esquema o diagrama entidad-relación (DER), es allí donde se muestran las entidades clave, las relaciones entre ellas y sus atributos. Para este proyecto se uso la aplicación "Miro" con el fin diseñar tal diagrama y presentarlo a continuación:
+Esos planos arquitectonicos definidos en nuestra área, es lo que se conoce como esquema o diagrama entidad-relación (DER), es allí donde se muestran las entidades clave, las relaciones entre ellas y sus atributos. 
+
+Para este proyecto se uso la aplicación "Miro" con el fin diseñar tal diagrama y presentarlo a continuación:
 
 ![DER](Data-Structure/DiagramaER.jpg)
 
@@ -184,7 +186,7 @@ GROUP BY STUDENT_NAME
 ORDER BY SEMESTER_AVERAGE DESC
 ~~~
 
-Para visualizar el ***Script completo y documentado de Manipulación de datos***, ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
+Para visualizar el ***Script completo y documentado de Manipulación de datos*** (tiene muchas más consultas), ir al siguiente enlace: [Sentencias de manipulación de datos](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/Data_Manipulation.sql)
 
 ## :bookmark_tabs: Tablas y Gráficos
 
@@ -194,7 +196,7 @@ El siguiente gráfico de barras nos enseña el promedio de calificaciones obteni
 
 ![Average-Qualification](TablasGraficos/SemesterAverage2.png)
 
-*Nota: La herramienta no permite manipular los colores ni tipos de gráficos, por ende sería útil utilizar alguna otra herramienta para desarrollar los Dashboard.*
+*Nota: La herramienta no permite manipular los colores ni tipos de gráficos, por ende, es importante utilizar alguna otra herramienta para desarrollar los Dashboard.*
 
 Del gráfico de barras podemos inferir por ejemplo que: 
 - Dentro de los estudiantes con mejor promedio, Thomas Brown fue quien matriculo más asignaturas equivalentes a 16 créditos académicos y obtuvo 4.96 de una nota maxima de 5.0.
@@ -207,7 +209,7 @@ Del gráfico de barras podemos inferir por ejemplo que:
 Con este segundo gráfico podemos concluir que:
 - Al curso que más estudiantes se registraron fue al de Mathematics I (9 estudiantes)
 - Al curso que menos estudiantes se registraron fue al de Biology
-- El curso de Chemistry impartido por el instructor Carlo Rey tiene 4 estudiantes matriculados y es el que menor promedio de calificaciones tiene, de 2.75
+- El curso de Chemistry impartido por el instructor Carlo Rey se matricularon 4 estudiantes y es el que menor promedio de calificaciones tiene, de 2.75
 
 *Nota: y así, podemos seguir jugando e infiriendo información valiosa de la base de datos [LJ-Academy](https://github.com/Johanna-Rojas/Creando_BD_SQLite/blob/main/LJ-Academy.db)*
 
