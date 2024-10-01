@@ -1,6 +1,6 @@
 ## :rocket: Introducción
 
-El **objetivo** principal de este proyecto es almacenar y gestionar la información relacionada con los estudiantes, los cursos e instructores de una academia de educación superior, creando así una base de datos pequeña y simple con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
+El **objetivo** principal de este proyecto es almacenar y gestionar la información relacionada con los estudiantes, los cursos e instructores de una academia de educación superior, creando así una base de datos pequeña con el fin de practicar y afianzar los conocimientos aprendidos sobre SQL.
 
 Para comenzar ejercitandonos en el manejo de las bases de datos, nada mejor que usar un sistema de gestión de base de datos relacional de código abierto, ligero, rápido, ideal para proyectos pequeños y medianos, que maneje un lenguaje SQL básico y además que sea flexible y no requiera instalación, estas caracteristicas las tiene: SQLite.
 
